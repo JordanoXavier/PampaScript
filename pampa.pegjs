@@ -9,6 +9,7 @@ Command
   = Assignment
   / IfStatement
   / WhileLoop
+  / WriteCommand
 
 Assignment
   = _ variable:Identifier _ "=" _ expression:Expression _ ";" _ { return { type: "assignment", variable, expression }; }
@@ -18,6 +19,9 @@ IfStatement
 
 WhileLoop
   = _ "ENQUANTO" _ condition:Condition _ "FAÇA" _ body:Command+ _ "FIMENQUANTO" _ { return { type: "while", condition, body }; }
+
+WriteCommand
+  = _ "ESCREVA" _ expression:Expression _ ";" _ { return { type: "write", expression }; }
 
 Condition
   = _ left:Expression _ ">" _ right:Expression _ { return { type: "binary", operator: ">", left, right }; }

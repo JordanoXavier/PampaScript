@@ -1,15 +1,16 @@
 const fs = require('fs');
 const peg = require('pegjs');
 
-const grammar = fs.readFileSync('portugol.pegjs', 'utf-8');
+const grammar = fs.readFileSync('pampa.pegjs', 'utf-8');
 const parser = peg.generate(grammar);
 
 function runProgram(ast) {
     const variables = {};
   
     function evaluateExpression(expression) {
-        if (expression.type === 'integer') {
-          return expression.value;
+      // console.log(expression)
+        if (expression[1][1].type === 'integer') {
+          return expression[1][1].value;
         } else if (expression.type === 'variable') {
           if (!(expression.name in variables)) {
             throw new Error(`Variável ${expression.name} não definida.`);
@@ -65,6 +66,10 @@ function runProgram(ast) {
         node.body.forEach(runCommand);
       }
     }
+
+    function executeWriteCommand(node) {
+      const value = evaluateExpression(node.expression);
+    }
   
     function runCommand(command) {
       switch (command.type) {
@@ -77,12 +82,18 @@ function runProgram(ast) {
         case 'while':
           executeWhileLoop(command);
           break;
+        case 'write':
+          executeWriteCommand(command);
+          break;
         default:
           throw new Error(`Tipo de comando desconhecido: ${command.type}`);
       }
     }
   
-    ast.forEach(runCommand);
+    for (let i = 0; i < ast.length; i++) {
+      runCommand(ast[i]);
+      console.log(variables)
+    }
 }
   
 const input = `
@@ -90,14 +101,15 @@ const input = `
   SE X > 5 ENTÃO
     Y = X * 2;
   FIMSE
-  ENQUANTO X > 0 FAÇA
+  ENQUANTO X > 2 FAÇA
     X = X - 1;
   FIMENQUANTO
+  ESCREVA X;
 `;
 
 try {
   const ast = parser.parse(input);
-  console.log(JSON.stringify(ast, null, 2));
+  // console.log(JSON.stringify(ast, null, 2));
   runProgram(ast);
 } catch (error) {
   console.error(error.message);
