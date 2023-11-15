@@ -4,7 +4,7 @@ const peg = require('pegjs');
 const grammar = fs.readFileSync('pampa.pegjs', 'utf-8');
 const parser = peg.generate(grammar);
 
-function runProgram(ast) {
+function compileProgram(ast) {
     const variables = {};
   
     function evaluateExpression(expression) {
@@ -123,9 +123,9 @@ const inputCode = `
 `;
 
 try {
-  const ast = parser.parse(inputCode);
-  // console.log(JSON.stringify(ast, null, 2));
-  runProgram(ast);
+  const parsedProgram = parser.parse(inputCode);
+  // console.log(JSON.stringify(parsedProgram, null, 2));
+  compileProgram(parsedProgram);
 } catch (error) {
   console.error(error.message);
 }
