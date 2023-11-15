@@ -120,6 +120,7 @@ const inputCode = `
   FIMENQUANTO
 
   ESCREVA X;
+  ESCREVA Y;
 `;
 
 try {
