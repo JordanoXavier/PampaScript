@@ -61,7 +61,6 @@ function runProgram(ast) {
           }
         }
       }
-  
 
     function executeAssignment(node) {
       const value = evaluateExpression(node.expression);
@@ -77,9 +76,9 @@ function runProgram(ast) {
     }
   
     function executeWhileLoop(node) {
-      // while (evaluateExpression(node.condition)) {
-      //   node.body.forEach(runCommand);
-      // }
+      while (evaluateExpression(node.condition)) {
+        node.body.forEach(runCommand);
+      }
     }
 
     function executeWriteCommand(node) {
@@ -106,25 +105,25 @@ function runProgram(ast) {
       }
     }
   
-    for (let i = 0; i < ast.length; i++) {
-      runCommand(ast[i]);
-      // console.log(variables)
-    }
+    ast.forEach(runCommand);
 }
   
-const input = `
+const inputCode = `
   X = 10;
+
   SE X > 5 ENTÃO
     Y = X * 2;
   FIMSE
+
   ENQUANTO X > 2 FAÇA
     X = X - 1;
   FIMENQUANTO
+
   ESCREVA X;
 `;
 
 try {
-  const ast = parser.parse(input);
+  const ast = parser.parse(inputCode);
   // console.log(JSON.stringify(ast, null, 2));
   runProgram(ast);
 } catch (error) {
