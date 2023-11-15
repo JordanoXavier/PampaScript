@@ -8,19 +8,34 @@ function runProgram(ast) {
     const variables = {};
   
     function evaluateExpression(expression) {
-      // console.log(expression)
-        if (expression[1][1].type === 'integer') {
-          return expression[1][1].value;
-        } else if (expression.type === 'variable') {
-          if (!(expression.name in variables)) {
-            throw new Error(`Variável ${expression.name} não definida.`);
+        let expressionPayload;
+
+        if(expression.length > 1) {
+          expressionPayload = expression[1][1] || expression[1]
+          //workaround to deal with pegjs strange output
+        }
+        else {
+          expressionPayload = expression
+        }
+
+        if (expressionPayload.type === 'integer') {
+          return expressionPayload.value;
+        } else if (expressionPayload.type === 'variable') {
+          if (!(expressionPayload.name in variables)) {
+            throw new Error(`Variável ${expressionPayload.name} não definida.`);
           }
-          return variables[expression.name];
-        } else if (expression.type === 'binary') {
-          const left = evaluateExpression(expression.left);
-          const right = evaluateExpression(expression.right);
+          return variables[expressionPayload.name];
+        } else if (expressionPayload.type === 'binary') {
+          return evaluateCondition(expressionPayload)
+        }
+      }
+
+    function evaluateCondition(condition) {
+        if (condition.type === 'binary') {
+          const left = evaluateExpression(condition.left);
+          const right = evaluateExpression(condition.right);
       
-          switch (expression.operator) {
+          switch (condition.operator) {
             case '+':
               return left + right;
             case '-':
@@ -42,33 +57,34 @@ function runProgram(ast) {
             case '!=':
               return left !== right;
             default:
-              throw new Error(`Operador desconhecido: ${expression.operator}`);
+              throw new Error(`Operador desconhecido: ${condition.operator}`);
           }
         }
       }
-      
   
+
     function executeAssignment(node) {
       const value = evaluateExpression(node.expression);
       variables[node.variable] = value;
     }
   
     function executeIfStatement(node) {
-      const condition = evaluateExpression(node.condition);
-  
+      const condition = evaluateCondition(node.condition);
+
       if (condition) {
         node.trueBranch.forEach(runCommand);
       }
     }
   
     function executeWhileLoop(node) {
-      while (evaluateExpression(node.condition)) {
-        node.body.forEach(runCommand);
-      }
+      // while (evaluateExpression(node.condition)) {
+      //   node.body.forEach(runCommand);
+      // }
     }
 
     function executeWriteCommand(node) {
       const value = evaluateExpression(node.expression);
+      console.log(value);
     }
   
     function runCommand(command) {
@@ -92,7 +108,7 @@ function runProgram(ast) {
   
     for (let i = 0; i < ast.length; i++) {
       runCommand(ast[i]);
-      console.log(variables)
+      // console.log(variables)
     }
 }
   
