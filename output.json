@@ -1,0 +1,166 @@
+[
+  {
+    "type": "assignment",
+    "variable": "X",
+    "expression": [
+      null,
+      [
+        null,
+        {
+          "type": "integer",
+          "value": 10
+        },
+        null
+      ],
+      null
+    ]
+  },
+  {
+    "type": "if",
+    "condition": {
+      "type": "binary",
+      "operator": ">",
+      "left": [
+        null,
+        [
+          null,
+          {
+            "type": "variable",
+            "name": "X"
+          },
+          null
+        ],
+        null
+      ],
+      "right": [
+        null,
+        [
+          null,
+          {
+            "type": "integer",
+            "value": 5
+          },
+          null
+        ],
+        null
+      ]
+    },
+    "trueBranch": [
+      {
+        "type": "assignment",
+        "variable": "Y",
+        "expression": [
+          null,
+          {
+            "type": "binary",
+            "operator": "*",
+            "left": {
+              "type": "variable",
+              "name": "X"
+            },
+            "right": [
+              null,
+              {
+                "type": "integer",
+                "value": 2
+              },
+              null
+            ]
+          },
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "type": "while",
+    "condition": {
+      "type": "binary",
+      "operator": ">",
+      "left": [
+        null,
+        [
+          null,
+          {
+            "type": "variable",
+            "name": "X"
+          },
+          null
+        ],
+        null
+      ],
+      "right": [
+        null,
+        [
+          null,
+          {
+            "type": "integer",
+            "value": 2
+          },
+          null
+        ],
+        null
+      ]
+    },
+    "body": [
+      {
+        "type": "assignment",
+        "variable": "X",
+        "expression": {
+          "type": "binary",
+          "operator": "-",
+          "left": [
+            null,
+            {
+              "type": "variable",
+              "name": "X"
+            },
+            null
+          ],
+          "right": [
+            null,
+            [
+              null,
+              {
+                "type": "integer",
+                "value": 1
+              },
+              null
+            ],
+            null
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "type": "write",
+    "expression": [
+      null,
+      [
+        null,
+        {
+          "type": "variable",
+          "name": "X"
+        },
+        null
+      ],
+      null
+    ]
+  },
+  {
+    "type": "write",
+    "expression": [
+      null,
+      [
+        null,
+        {
+          "type": "variable",
+          "name": "Y"
+        },
+        null
+      ],
+      null
+    ]
+  }
+]
