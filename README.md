@@ -1,6 +1,6 @@
 # PampaScript
 
-A linguagem PampaScript tem como propósito ser semelhante a língua portuguesa, podendo ser utilizada no contexto educacional para o ensino da programação.
+A linguagem PampaScript tem como propósito ser semelhante à língua portuguesa, podendo ser utilizada no contexto educacional para o ensino da programação.
 Este é um projeto que utiliza JavaScript e a biblioteca PEG.js para compilar uma DSL (Domain-Specific Language) simples e executar os comandos definidos nessa linguagem.
 
 ## Funcionalidades
