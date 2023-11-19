@@ -6,10 +6,10 @@ Este é um projeto que utiliza JavaScript e a biblioteca PEG.js para compilar um
 ## Funcionalidades
 
 - **Compilação de DSL**: O projeto é capaz de compilar uma DSL específica definida para realizar operações de atribuição, condições, loops e saída de valores.
-- **Execução de Comandos**: Ao interpretar a DSL, o sistema executa os comandos correspondentes de acordo com a lógica definida.
+- **Execução de Comandos**: Ao rodar a DSL, o sistema executa os comandos correspondentes em JavaScript de acordo com a lógica definida.
 
 ## Sintaxe
-O arquivo example.pampa contém exemplos de uso das funcionalidades implementadas até o momento.
+O arquivo `example.pampa` contém exemplos de uso das funcionalidades implementadas até o momento.
 ```
 X = 10;
 
