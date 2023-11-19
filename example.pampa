@@ -1,0 +1,12 @@
+X = 10;
+
+SE X > 5 ENTÃO
+    Y = X * 2;
+FIMSE
+
+ENQUANTO X > 2 FAÇA
+    X = X - 1;
+FIMENQUANTO
+
+ESCREVA X;
+ESCREVA Y;
