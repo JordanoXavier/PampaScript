@@ -3,7 +3,6 @@
     "pegjs": "^0.10.0"
   },
   "scripts": {
-    "transpile": "node transpiler.js",
     "compile": "node compiler.js"
   }
 }

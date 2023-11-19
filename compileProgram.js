@@ -108,14 +108,4 @@ function compileProgram(ast) {
   ast.forEach(runCommand);
 }
 
-const inputCode = fs.readFileSync("./example.pampa", 'utf8');
-
-try {
-  const parsedProgram = parser.parse(inputCode);
-  // console.log(JSON.stringify(parsedProgram, null, 2));
-  compileProgram(parsedProgram);
-} catch (error) {
-  console.error(error.message);
-}
-
-module.exports = compileProgram;
+module.exports = {compileProgram};

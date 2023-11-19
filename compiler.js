@@ -1,11 +1,11 @@
 const fs = require('fs');
 const peg = require('pegjs');
-const { compileProgram } = require('./script');
+const { compileProgram } = require('./compileProgram');
 
 
 const args = process.argv.slice(1);
 
-const param1 = args[0];
+const param1 = args[1];
 
 if (!param1) {
     console.error('Usage: yarn compile file.pampa');
